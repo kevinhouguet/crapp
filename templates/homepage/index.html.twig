@@ -1,0 +1,30 @@
+{# TODO : include twig base template #}
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<header>
+  <nav>
+    <ul>
+      {# <li class='brand'><a href="{{ path('home') }}">{{ title }}</a></li> #}
+      <li class='brand'><a href="">{{ title }}</a></li>
+      <li><a href="">Login</a></li>
+    </ul>
+  </nav>
+</header>
+<div class='warning'>
+  <ul>
+    <li>Merci de vous connecter avant d'utiliser l'application</li>
+    <li>Veuillez choisir l'unité de vos activité</li>
+    <li>Veuillez choisir le mois et l'année correspondant à votre activité</li>
+    <li>Cliquez ensuite sur chaque jour pour lesquels vous souhaitez déclarer une activité et indiquez dans la popup les éléments demandés</li>
+  </ul>
+</div>
+<div class='activity-units'>
+  <a href=''>Heure(s)</a>
+  <a href=''>Demi-journée(s)</a>
+</div>
+
+<div data-controller="calendar"></div>
+
+{% endblock %}
