@@ -25,6 +25,13 @@
   <a href=''>Demi-journée(s)</a>
 </div>
 
-<div data-controller="calendar"></div>
+<form>
+  {# <div class='calendar-header'>
+    <div data-controller="calendar-months" data-action="change->calendar#test"></div>
+    <div data-controller="calendar-years"></div>
+  </div> #}
+  <div data-controller="calendar"></div>
+</form>
+
 
 {% endblock %}

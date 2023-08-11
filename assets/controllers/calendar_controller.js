@@ -11,15 +11,16 @@ import { Controller } from '@hotwired/stimulus';
  */
 export default class extends Controller {
     connect() {
-      this.element.innerHTML = this.createCalendar(8, 2023);
+      this.element.appendChild(this.createHeaderCalendar());
+      this.element.appendChild(this.createCalendar(8, 2023));
     }
+    
     createCalendar(month, year) {
       const date = new Date(year, month - 1, 1);
 
-      const firstDayPosition = date.getDay();
+      let firstDayPosition = date.getDay();
+      if (firstDayPosition === 0) { firstDayPosition = 7; }
       const numberOfDayOfDate = new Date(year, month, 0).getDate();
-
-      console.log(firstDayPosition, numberOfDayOfDate);
 
       const days = ['L', 'M', 'Me', 'J', 'V', 'S', 'D'];
       const table = document.createElement('table');
@@ -45,6 +46,63 @@ export default class extends Controller {
         if(line.textContent !== '') { tbody.appendChild(line); } // remove empty lines
       }
       table.appendChild(tbody);
-      return table.outerHTML; // return html string
+      return table;
+    }
+
+    createHeaderCalendar() {
+      const headerDiv = document.createElement('div');
+      headerDiv.classList.add('calendar-header');
+
+      const monthSelect = this.createMonthsSelect();
+      const yearSelect = this.createYearCalendar();
+
+      // add event listener
+      monthSelect.addEventListener('change', this.handleOnMonthChange);
+      // yearSelect.addEventListener('change', this.handleOnYearChange);
+
+      headerDiv.appendChild(monthSelect);
+      headerDiv.appendChild(yearSelect);
+
+      return headerDiv;
+    }
+
+    createMonthsSelect() {
+      const month = document.createElement('select');
+      month.classList.add('month');
+      const months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
+                      'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+      const currentMonth = new Date().getMonth();
+      for (let i = 0; i < 12; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = months[i];
+        if (i === currentMonth) {
+          option.setAttribute('selected', true);
+        }
+        month.appendChild(option);
+      }
+      
+      return month;
+    }
+
+    createYearCalendar() {
+      const year = document.createElement('select');
+      year.classList.add('year');
+      const currentYear = new Date().getFullYear();
+      for (let i = 0; i < 10; i++) {
+        const option = document.createElement('option');
+        option.value = currentYear - i;
+        option.textContent = currentYear - i;
+        if (i === 0) { option.selected = true; }
+        year.appendChild(option);
+      }
+      return year;
+    }
+
+    handleOnMonthChange = (event) => {
+      console.log(event.target.value);
+      const year = this.element.querySelector('select.year').value;
+      this.element.removeChild(this.element.lastChild);
+      this.element.appendChild(this.createCalendar(parseInt(event.target.value) + 1, parseInt(year,10)));
     }
 }
