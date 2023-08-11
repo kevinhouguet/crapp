@@ -58,7 +58,7 @@ export default class extends Controller {
 
       // add event listener
       monthSelect.addEventListener('change', this.handleOnMonthChange);
-      // yearSelect.addEventListener('change', this.handleOnYearChange);
+      yearSelect.addEventListener('change', this.handleOnYearChange);
 
       headerDiv.appendChild(monthSelect);
       headerDiv.appendChild(yearSelect);
@@ -100,9 +100,14 @@ export default class extends Controller {
     }
 
     handleOnMonthChange = (event) => {
-      console.log(event.target.value);
       const year = this.element.querySelector('select.year').value;
       this.element.removeChild(this.element.lastChild);
       this.element.appendChild(this.createCalendar(parseInt(event.target.value) + 1, parseInt(year,10)));
+    }
+
+    handleOnYearChange = (event) => {
+      const month = this.element.querySelector('select.month').value;
+      this.element.removeChild(this.element.lastChild);
+      this.element.appendChild(this.createCalendar(parseInt(month) + 1, parseInt(event.target.value,10)));
     }
 }
