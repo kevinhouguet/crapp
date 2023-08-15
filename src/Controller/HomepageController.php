@@ -9,9 +9,6 @@ class HomepageController extends AbstractController{
 
   #[Route('/')]
     public function index() : Response {
-
-      
-
       return $this->render('homepage/index.html.twig', [
         'title' => 'It\'s a Crapp',
       ]);

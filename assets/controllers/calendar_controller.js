@@ -1,15 +1,9 @@
 import { Controller } from '@hotwired/stimulus';
 
-/*
- * This is an example Stimulus controller!
- *
- * Any element with a data-controller="hello" attribute will cause
- * this controller to be executed. The name "hello" comes from the filename:
- * hello_controller.js -> "hello"
- *
- * Delete this file or adapt it for your use!
- */
 export default class extends Controller {
+
+    static targets = ['daySelected', 'unitOfWorkingActivity'];
+
     connect() {
       this.element.appendChild(this.createHeaderCalendar());
       this.element.appendChild(this.createCalendar(8, 2023));
@@ -28,17 +22,36 @@ export default class extends Controller {
 
       for (let i = 0; i < 7; i++) {
         const line = document.createElement('tr');
+        if (i != 0) { line.classList.add('week'); }
+
         for (let j = 1; j < 8; j++) {
           if (i === 0) {
+            // 
+            // create header cells
+            //
             const cell = document.createElement('th');
+            cell.classList.add('cell');
+            cell.classList.add('cell-header');
             cell.textContent = days[j-1];
             line.appendChild(cell);
           } else {
+            //
+            // create days cells
+            //
             const cell = document.createElement('td');
+            cell.classList.add('cell');
             const calc = (i - 1) * 7 + j + 1 - firstDayPosition;
 
             // remove empty cells
             cell.textContent = calc > 0 && calc <= numberOfDayOfDate ? calc : '';
+            
+            if(cell.textContent) { 
+              // add class day to days cells only because we don't want to click on empty cells
+              cell.classList.add('day');
+
+              // add data-action attribute to days cells only
+              cell.setAttribute('data-action', 'click->calendar#handleClickedDay');
+            } 
 
             line.appendChild(cell);
           }          
@@ -109,5 +122,51 @@ export default class extends Controller {
       const month = this.element.querySelector('select.month').value;
       this.element.removeChild(this.element.lastChild);
       this.element.appendChild(this.createCalendar(parseInt(month) + 1, parseInt(event.target.value,10)));
+    }
+
+    handleClickedDay = (event) => {
+      // remove selected class on all days
+      const dayElements = this.element.querySelectorAll('td.day');
+      dayElements.forEach((dayElem) => {
+        dayElem.classList.remove('selected');
+      });
+
+      // add selected class on clicked day
+      const dayElem = event.target;
+      dayElem.classList.add('selected');
+
+      // get date selected
+      const day = event.target.textContent;
+      const month = this.element.querySelector('select.month').value;
+      const year = this.element.querySelector('select.year').value;
+      const date = new Date(year, month, day);
+      console.log(date);
+      this.updateViewActivity(date.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
+    }
+
+    updateViewActivity = (day) => {
+      this.daySelectedTarget.textContent = day;
+    }
+
+    submitActivity = (event) => {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      console.log('submit form');
+      // const url = form.getAttribute('action');
+      // const method = form.getAttribute('method');
+      // const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      // const headers = new Headers({
+      //   'X-CSRF-Token': token
+      // });
+      // const body = new URLSearchParams(formData.entries());
+      // fetch(url, { method, headers, body })
+      //   .then(response => response.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //   })
+      //   .catch((error) => {
+      //     console.error(error);
+      //   });
     }
 }
