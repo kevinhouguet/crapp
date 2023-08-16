@@ -26,7 +26,7 @@
       {# action="{{ path('calendar') }}" #}
       data-controller="calendar" 
       data-action="submit->calendar#submitActivity">
-      
+
     <div class='activity-units'>
       <a href=''>Heure(s)</a>
       <a href=''>Demi-journée(s)</a>
@@ -35,29 +35,21 @@
     <article class="day-description">
       <h3>Activités déclarées pour le <span class="day-selected" data-calendar-target="daySelected">...</span></h3>
       <div class="input-group">
-        <label data-calendar-target="unitOfWorkingActivity">Heure(s) / Demi-journée(s) :</label>
-        <input type="number" name="activity" value="1" placeholder="0" />
+        <label for="activity" data-calendar-target="unitOfWorkingActivity">Heure(s) / Demi-journée(s) :</label>
+        <input type="number" name="activity" value="1" placeholder="0" min="1" id="activity"/>
       </div>
       <div class="input-group">
-        <label>Projet :</label>
-        <select>
-          <option value="1">Projet 1</option>
-          <option value="2">Projet 2</option>
-          <option value="3">Add a project</option>
-        </select>
+        <label for="project">Projet :</label>
+        <input type="text" name="project" id="project" placeholder="Nom du projet" />
       </div>
       <div class="input-group">
-        <label>Tâches réalisées :</label>
-        <textarea name="tasks" placeholder="Taper ici les diverses tâches réalisées durant cette période"></textarea>
-      </div>    
+        <label for="tasks">Tâches réalisées :</label>
+        <textarea name="tasks" id="tasks" placeholder="Taper ici les diverses tâches réalisées durant cette période"></textarea>
+      </div>
     </article>
     <div class="input-group">
-      <label for="clientName">Client :</label>
-      <select>
-        <option value="1">Client 1</option>
-        <option value="2">Client 2</option>
-        <option value="3">Add a client</option>
-      </select>
+      <label for="customers">Client :</label>
+      <input type="text" name="customers" id="customers" placeholder="Nom du client" />
     </div>
     <input type="submit" value="Créer le rapport d'activité" />
 </form>

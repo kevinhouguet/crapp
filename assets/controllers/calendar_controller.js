@@ -2,7 +2,9 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
 
-    static targets = ['daySelected', 'unitOfWorkingActivity'];
+    static targets = ['daySelected', 'unitOfWorkingActivity', 'customers'];
+
+    cache = [{}] // cache data of activity;
 
     connect() {
       this.element.appendChild(this.createHeaderCalendar());
@@ -125,6 +127,9 @@ export default class extends Controller {
     }
 
     handleClickedDay = (event) => {
+
+      this.updateCacheActivity();
+
       // remove selected class on all days
       const dayElements = this.element.querySelectorAll('td.day');
       dayElements.forEach((dayElem) => {
@@ -142,6 +147,9 @@ export default class extends Controller {
       const date = new Date(year, month, day);
       console.log(date);
       this.updateViewActivity(date.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
+
+      // get activity of date selected
+
     }
 
     updateViewActivity = (day) => {
@@ -168,5 +176,37 @@ export default class extends Controller {
       //   .catch((error) => {
       //     console.error(error);
       //   });
+    }
+
+    handleAddNewCustomer = (event) => {
+      alert('add new customer');
+    }
+
+    updateCacheActivity = () => {
+      if(this.element.querySelector('td.selected')){
+        const daySelected = this.element.querySelector('td.selected');
+        const activity = this.element.querySelector('#activity');
+        const customers = this.element.querySelector('#customers');
+        const project = this.element.querySelector('#project');
+        const tasks = this.element.querySelector('#tasks');
+
+        if(activity.value != '' && customers.value != '' && project.value != '' && tasks.value != '') {
+          const obj = { 
+            day : daySelected.textContent, 
+            activity : activity.value, 
+            customers : customers.value, 
+            project : project.value, 
+            tasks : tasks.value };
+  
+          
+          this.cache.push(obj);
+  
+          activity.value = 1;
+          customers.value = '';
+          project.value = '';
+          tasks.value = '';
+        }
+      }      
+      console.log(this.cache);
     }
 }
