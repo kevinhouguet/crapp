@@ -150,6 +150,20 @@ export default class extends Controller {
 
       // get activity of date selected
 
+      const alreadyInCache = this.cache.find((obj) => {
+        return obj.day === day;
+      });
+      if(alreadyInCache) {
+        const activity = this.element.querySelector('#activity');
+        const customers = this.element.querySelector('#customers');
+        const project = this.element.querySelector('#project');
+        const tasks = this.element.querySelector('#tasks');
+
+        activity.value = alreadyInCache.activity;
+        customers.value = alreadyInCache.customers;
+        project.value = alreadyInCache.project;
+        tasks.value = alreadyInCache.tasks;
+      }
     }
 
     updateViewActivity = (day) => {
@@ -190,23 +204,36 @@ export default class extends Controller {
         const project = this.element.querySelector('#project');
         const tasks = this.element.querySelector('#tasks');
 
-        if(activity.value != '' && customers.value != '' && project.value != '' && tasks.value != '') {
-          const obj = { 
-            day : daySelected.textContent, 
-            activity : activity.value, 
-            customers : customers.value, 
-            project : project.value, 
-            tasks : tasks.value };
-  
-          
-          this.cache.push(obj);
-  
-          activity.value = 1;
-          customers.value = '';
-          project.value = '';
-          tasks.value = '';
+        const alreadyInCache = this.cache.find((obj) => {
+          return obj.day === daySelected.textContent;
+        });
+
+        if(alreadyInCache) {
+          alreadyInCache.activity = activity.value;
+          alreadyInCache.customers = customers.value;
+          alreadyInCache.project = project.value;
+          alreadyInCache.tasks = tasks.value;
         }
-      }      
-      console.log(this.cache);
+        else {
+
+          if(activity.value != '' && customers.value != '' && project.value != '' && tasks.value != '') {
+            const obj = { 
+              day : daySelected.textContent, 
+              activity : activity.value, 
+              customers : customers.value, 
+              project : project.value, 
+              tasks : tasks.value
+            };
+            
+            this.cache.push(obj);
+    
+          }
+        }
+        activity.value = 1;
+        customers.value = '';
+        project.value = '';
+        tasks.value = '';
+        console.log(this.cache);
+      }
     }
 }
