@@ -1,0 +1,18 @@
+.activity-form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.day-description {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+}

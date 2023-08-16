@@ -8,7 +8,7 @@
     <ul>
       {# <li class='brand'><a href="{{ path('home') }}">{{ title }}</a></li> #}
       <li class='brand'><a href="">{{ title }}</a></li>
-      <li><a href="">Login</a></li>
+      <li><a href="" class="btn-secondary">Login</a></li>
     </ul>
   </nav>
 </header>
@@ -21,37 +21,39 @@
   </ul>
 </div>
 
-<form 
+<form class="activity-form"
       method="post"
       {# action="{{ path('calendar') }}" #}
       data-controller="calendar" 
       data-action="submit->calendar#submitActivity">
 
-    <div class='activity-units'>
-      <a href=''>Heure(s)</a>
-      <a href=''>Demi-journée(s)</a>
-    </div>
-
-    <article class="day-description">
-      <h3>Activités déclarées pour le <span class="day-selected" data-calendar-target="daySelected">...</span></h3>
-      <div class="input-group">
-        <label for="activity" data-calendar-target="unitOfWorkingActivity">Heure(s) / Demi-journée(s) :</label>
-        <input type="number" name="activity" value="1" placeholder="0" min="1" id="activity"/>
+    <section id="calendar"></section>
+    <section class="activity-form-content">
+      <div class='activity-units'>
+        <a href=''>Heure(s)</a>
+        <a href=''>Demi-journée(s)</a>
       </div>
+      <article class="day-description">
+        <h3>Activités déclarées pour le <span class="day-selected" data-calendar-target="daySelected">...</span></h3>
+        <div class="input-group">
+          <label for="activity" data-calendar-target="unitOfWorkingActivity">Heure(s) / Demi-journée(s) :</label>
+          <input type="number" name="activity" value="1" placeholder="0" min="0" id="activity"/>
+        </div>
+        <div class="input-group">
+          <label for="project">Projet :</label>
+          <input type="text" name="project" id="project" placeholder="Nom du projet" />
+        </div>
+        <div class="input-group">
+          <label for="tasks">Tâches réalisées :</label>
+          <textarea name="tasks" id="tasks" placeholder="Taper ici les diverses tâches réalisées durant cette période"></textarea>
+        </div>
+      </article>
       <div class="input-group">
-        <label for="project">Projet :</label>
-        <input type="text" name="project" id="project" placeholder="Nom du projet" />
+        <label for="customers">Client :</label>
+        <input type="text" name="customers" id="customers" placeholder="Nom du client" />
       </div>
-      <div class="input-group">
-        <label for="tasks">Tâches réalisées :</label>
-        <textarea name="tasks" id="tasks" placeholder="Taper ici les diverses tâches réalisées durant cette période"></textarea>
-      </div>
-    </article>
-    <div class="input-group">
-      <label for="customers">Client :</label>
-      <input type="text" name="customers" id="customers" placeholder="Nom du client" />
-    </div>
-    <input type="submit" value="Créer le rapport d'activité" />
+      <input type="submit" value="Créer le rapport d'activité" />
+    </section>
 </form>
 
 

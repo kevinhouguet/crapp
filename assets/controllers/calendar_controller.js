@@ -6,9 +6,11 @@ export default class extends Controller {
 
     cache = [{}] // cache data of activity;
 
+    calendarElement = this.element.querySelector('#calendar');
+
     connect() {
-      this.element.appendChild(this.createHeaderCalendar());
-      this.element.appendChild(this.createCalendar(8, 2023));
+      this.calendarElement.appendChild(this.createHeaderCalendar());
+      this.calendarElement.appendChild(this.createCalendar(8, 2023));
     }
     
     createCalendar(month, year) {
@@ -116,14 +118,14 @@ export default class extends Controller {
 
     handleOnMonthChange = (event) => {
       const year = this.element.querySelector('select.year').value;
-      this.element.removeChild(this.element.lastChild);
-      this.element.appendChild(this.createCalendar(parseInt(event.target.value) + 1, parseInt(year,10)));
+      this.calendarElement.removeChild(this.calendarElement.lastChild);
+      this.calendarElement.appendChild(this.createCalendar(parseInt(event.target.value) + 1, parseInt(year,10)));
     }
 
     handleOnYearChange = (event) => {
       const month = this.element.querySelector('select.month').value;
-      this.element.removeChild(this.element.lastChild);
-      this.element.appendChild(this.createCalendar(parseInt(month) + 1, parseInt(event.target.value,10)));
+      this.calendarElement.removeChild(this.calendarElement.lastChild);
+      this.calendarElement.appendChild(this.createCalendar(parseInt(month) + 1, parseInt(event.target.value,10)));
     }
 
     handleClickedDay = (event) => {
@@ -146,7 +148,7 @@ export default class extends Controller {
       const year = this.element.querySelector('select.year').value;
       const date = new Date(year, month, day);
       console.log(date);
-      this.updateViewActivity(date.toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
+      this.updateViewActivity(date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }));
 
       // get activity of date selected
 
@@ -225,7 +227,7 @@ export default class extends Controller {
               tasks : tasks.value
             };
             
-            this.cache.push(obj);
+            this.cache.push(obj); // add new activity in cache
     
           }
         }
