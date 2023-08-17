@@ -4,6 +4,8 @@ export default class extends Controller {
 
     static targets = ['daySelected', 'unitOfWorkingActivity', 'customers'];
 
+    unitChoose = 0;
+
     cache = [{}] // cache data of activity;
 
     calendarElement = this.element.querySelector('#calendar');
@@ -237,5 +239,17 @@ export default class extends Controller {
         tasks.value = '';
         console.log(this.cache);
       }
+    }
+
+    handleClickUnit = (event) => {
+      event.preventDefault();
+      const unitChooses = this.element.querySelectorAll('.unitChoose');
+      unitChooses.forEach((unitChoose) => {
+        unitChoose.classList.remove('unitChoose-active');
+      });
+      const unitChoose = event.target;
+      unitChoose.classList.add('unitChoose-active');
+
+      this.unitChoose = unitChoose.dataset.value;
     }
 }

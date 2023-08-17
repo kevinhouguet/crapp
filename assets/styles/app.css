@@ -50,7 +50,7 @@ a {
   text-decoration: none;
 }
 
-input[type='submit'], a.btn-primary {
+input[type='submit'], a.btn-primary, .unitChoose-active {
   background-color: var(--color-primary);
   color: #fff;
   border: none;

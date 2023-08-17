@@ -29,9 +29,9 @@
 
     <section id="calendar"></section>
     <section class="activity-form-content">
-      <div class='activity-units'>
-        <a href=''>Heure(s)</a>
-        <a href=''>Demi-journée(s)</a>
+      <div class='activity-units' data-action="click->calendar#handleClickUnit">
+        <a href='' class="unitChoose" data-value="1">Heure(s)</a> /
+        <a href='' class="unitChoose unitChoose-active" data-value="0">Demi-journée(s)</a>
       </div>
       <article class="day-description">
         <h3>Activités déclarées pour le <span class="day-selected" data-calendar-target="daySelected">...</span></h3>
