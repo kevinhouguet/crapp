@@ -13,22 +13,30 @@ class ActivityReportController extends AbstractController
     #[Route('/activity-report')]
     public function pdfAction(Pdf $knpSnappyPdf) 
     {
+        $report = $_POST;
         $knpSnappyPdf->setOption('encoding', 'utf-8');
 
-        $html = $this->renderView('pdf.html.twig', [
-            'title' => 'Hello World !'
+        $html = $this->renderView('pdf/pdf.html.twig', [
+            'title' => 'Hello World !',
+            'report' => $report
         ]);
 
-        $finename = 'custom_pdf_from_twig';
+        $finename = 'custom_pdf_from_twig'; // change this dynamically
 
-        return new Response(
-            $knpSnappyPdf->getOutputFromHtml($html),
-            200,
-            array(
-            'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="'.$finename.'.pdf"'
-            )
-        );
+        try {
+            $response = new Response(
+                $knpSnappyPdf->getOutputFromHtml($html),
+                200,
+                [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename="' . $finename . '.pdf"'
+                ]
+            );
+        } catch (\Exception $e) {
+            $response = new Response($e->getMessage());
+        }
+
+        return $response;
         
     }
 }

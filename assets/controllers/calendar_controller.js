@@ -174,7 +174,7 @@ export default class extends Controller {
       this.daySelectedTarget.textContent = day;
     }
 
-    submitActivity = (event) => {
+    submitActivity = async (event) => {
       event.preventDefault();
       const form = event.target;
       const formData = new FormData(form);
@@ -187,14 +187,48 @@ export default class extends Controller {
       //   'X-CSRF-Token': token
       // });
       const body = new URLSearchParams(formData.entries());
-      fetch(url, { method, body })
-        .then(response => response.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      
+      // send data to server and get response from server with a pdf type
+      // fetch(url, {
+      //   method: method,
+      //   // headers: headers,
+      //   body: body
+      // })
+      // .then(response => {
+      //   console.log(response);
+      //   return response.blob()
+      // })
+      // .then(blob => {
+      //   const url = window.URL.createObjectURL(blob);
+      //   const a = document.createElement('a');
+      //   a.href = url;
+      //   a.download = 'file.pdf';
+      //   document.body.appendChild(a);
+      //   a.click();    
+      //   a.remove();
+      // })
+      // .catch(error => console.error(error));
+
+      const httpResponse = await fetch(url, {
+        method: method,
+        // headers: headers,
+        body: body
+      })
+
+      if(httpResponse.ok) {
+        const blob = await httpResponse.blob();
+        const urlToDL = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = urlToDL;
+        a.download = 'file.pdf';
+        document.body.appendChild(a);
+        a.click();    
+        a.remove();
+      } else {
+        console.log(httpResponse);
+      }
+
+
     }
 
     handleAddNewCustomer = (event) => {
