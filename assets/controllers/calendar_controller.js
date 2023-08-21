@@ -6,7 +6,7 @@ export default class extends Controller {
 
     unitChoose = 0;
 
-    cache = [{}] // cache data of activity;
+    cache = [] // cache data of activity;
 
     calendarElement = this.element.querySelector('#calendar');
 
@@ -179,21 +179,22 @@ export default class extends Controller {
       const form = event.target;
       const formData = new FormData(form);
       console.log('submit form');
-      // const url = form.getAttribute('action');
-      // const method = form.getAttribute('method');
+      console.log(formData);
+      const url = form.getAttribute('action');
+      const method = form.getAttribute('method');
       // const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
       // const headers = new Headers({
       //   'X-CSRF-Token': token
       // });
-      // const body = new URLSearchParams(formData.entries());
-      // fetch(url, { method, headers, body })
-      //   .then(response => response.json())
-      //   .then((data) => {
-      //     console.log(data);
-      //   })
-      //   .catch((error) => {
-      //     console.error(error);
-      //   });
+      const body = new URLSearchParams(formData.entries());
+      fetch(url, { method, body })
+        .then(response => response.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
 
     handleAddNewCustomer = (event) => {
