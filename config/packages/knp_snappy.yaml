@@ -6,6 +6,7 @@ knp_snappy:
             no-outline: true
             page-size: A4
             encoding: UTF-8
+            enable-local-file-access: true
     image:
         enabled:    true
         binary:     "\"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltoimage.exe\""
