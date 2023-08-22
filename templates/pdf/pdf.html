@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../assets/styles/pdf.css">
   <title>Document</title>
 </head>
-<body>
-  <header>
-    <div class="branding">Company</div>
+<body id="report-pdf">
+  <header id="page-header">
+    <div class="logo">Company</div>
     <div class="recipient">
       <div class="recipient__name">John Doe</div>
       <div class="recipient__address">123 Main St</div>
@@ -16,32 +17,32 @@
   </header>
   <main>
     <header>
-    <div class="header__title">
-      <h1>Compte rendu d'activité</h1>
-      <p class="report__date">Août 2023</p>
-    </div>
-    <div class="header__content">
-      <div class="left">
-        <div class="item">
-          <div class="item__title">Nom du projet / des travaux :</div>
-          <div class="item__content">Administration Sytème et Réseau</div>
+      <div class="header__title">
+        <h1>Compte rendu d'activité</h1>
+        <p class="report__date">Août 2023</p>
+      </div>
+      <div class="header__content">
+        <div class="left">
+          <div class="item__labels">
+            <div>Nom du projet / des travaux :</div>
+            <div>Responsable client :</div>
+            <div>Intervenant prestation :</div>
+          </div>
+          <div class="item__content">
+            <div>Administration Sytème et Réseau</div>
+            <div>John Smith</div>
+            <div>Erik Admin</div>
+          </div>
         </div>
-        <div class="item">
-          <div class="item__title">Responsable client :</div>
-          <div class="item__content">John Smith</div>
-        </div>
-        <div class="item">
-          <div class="item__title">Intervenant prestation :</div>
-          <div class="item__content">Erik Admin</div>
+        <div class="right">
+          <div class="item__labels">
+            <div>Date :</div>
+          </div>
+          <div class="item__content">
+            <div>31/08/2023</div>
+          </div>
         </div>
       </div>
-      <div class="right">
-        <div class="item">
-          <div class="item__title">Date :</div>
-          <div class="item__content">31/08/2023</div>
-        </div>
-      </div>
-    </div>
     </header>
     <div class="content">
       Ici le calendrier

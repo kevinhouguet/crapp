@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
+
+#report-pdf {
+  padding: 0;
+  margin: 0;
+  color: #000;
+  font-family: Montserrat, sans-serif;
+  font-size: 12px;
+}
+
+#report-pdf h1 {
+  font-size: unset;
+  padding: 0;
+  margin: 0;
+}
+
+#report-pdf p {
+  padding: 0;
+  margin: 0;
+}
+
+/* 
+
+  PAGE HEADER
+
+*/
+
+#report-pdf header#page-header {
+  padding: 1rem 2rem;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+          align-items: center;
+}
+
+#report-pdf header#page-header .logo {
+  font-size: 36px;
+  font-weight: 800;
+}
+
+#report-pdf header#page-header .recipient {
+  padding: 1rem;
+
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+#report-pdf header#page-header .recipient .recipient__name {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* 
+
+  CONTENT HEADER
+
+*/
+
+#report-pdf main header .header__title{
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0.6rem 0;
+
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+#report-pdf main header .header__title h1 {
+  margin-bottom: 10px;
+}
+
+/* 
+
+  CONTENT ADMINISTRATIVE HEADER
+
+*/
+
+#report-pdf main header .header__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  -webkit-box-pack: justify;
+      justify-content: space-around;
+  -webkit-box-align: top;
+  -ms-flex-align: top;
+          align-items: top;
+  padding: 0.6rem 0;
+}
+
+#report-pdf main header .header__content .left,
+#report-pdf main header .header__content .right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#report-pdf main header .header__content .item__content {
+  margin-left: 1rem;
+}
+
+#report-pdf main header .header__content .item__labels,
+#report-pdf main header .header__content .item__content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#report-pdf main header .header__content .item__labels {
+  font-weight: 700;
+}
+
+#report-pdf main header .header__content .item__labels *,
+#report-pdf main header .header__content .item__content * {
+  margin-bottom: 0.5rem;
+}
+
+/* 
+
+  CALENDAR
+
+*/
+
+/* 
+
+  FOOTER : Signatures
+
+*/
+
+#report-pdf footer.signatures {
+  padding: 1rem;
+  
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: top;
+      -ms-flex-align: top;
+          align-items: top;
+}
+
+#report-pdf footer.signatures .item {
+  width: 32%;
+}
+
+#report-pdf footer.signatures .item__title {
+  padding: 0 0.5rem;
+}
+
+#report-pdf footer.signatures .item__title,
+#report-pdf footer.signatures .item__signature {
+  border: 1px solid #000;
+}
+
+#report-pdf footer.signatures .item__signature {
+  border-top: none;
+  height: 100px;
+}
