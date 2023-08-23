@@ -176,44 +176,28 @@ export default class extends Controller {
 
     submitActivity = async (event) => {
       event.preventDefault();
+      this.updateCacheActivity();
       const form = event.target;
-      const formData = new FormData(form);
-      console.log('submit form');
-      console.log(formData);
+      // const formData = new FormData(this.cache);
       const url = form.getAttribute('action');
       const method = form.getAttribute('method');
       // const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
       // const headers = new Headers({
       //   'X-CSRF-Token': token
       // });
-      const body = new URLSearchParams(formData.entries());
-      
-      // send data to server and get response from server with a pdf type
-      // fetch(url, {
-      //   method: method,
-      //   // headers: headers,
-      //   body: body
-      // })
-      // .then(response => {
-      //   console.log(response);
-      //   return response.blob()
-      // })
-      // .then(blob => {
-      //   const url = window.URL.createObjectURL(blob);
-      //   const a = document.createElement('a');
-      //   a.href = url;
-      //   a.download = 'file.pdf';
-      //   document.body.appendChild(a);
-      //   a.click();    
-      //   a.remove();
-      // })
-      // .catch(error => console.error(error));
+      // const body = new URLSearchParams(formData.entries());
+      const body = JSON.stringify(this.cache); // convert cache to json
 
       const httpResponse = await fetch(url, {
         method: method,
         // headers: headers,
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: body
       })
+
+      console.log(body);
 
       if(httpResponse.ok) {
         const blob = await httpResponse.blob();
@@ -228,7 +212,9 @@ export default class extends Controller {
         console.log(httpResponse);
       }
 
-
+      // httpResponse.json().then((data) => {
+      //   console.log(data);
+      // });
     }
 
     handleAddNewCustomer = (event) => {
@@ -272,7 +258,6 @@ export default class extends Controller {
         customers.value = '';
         project.value = '';
         tasks.value = '';
-        console.log(this.cache);
       }
     }
 

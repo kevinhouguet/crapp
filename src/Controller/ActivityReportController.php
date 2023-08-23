@@ -6,19 +6,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Knp\Snappy\Pdf;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class ActivityReportController extends AbstractController
 {
     #[Route('/activity-report')]
-    public function pdfAction(Pdf $knpSnappyPdf) 
+    public function pdfAction(Pdf $knpSnappyPdf, LoggerInterface $logger, Request $request) 
     {
-        $report = $_POST;
         $knpSnappyPdf->setOption('encoding', 'utf-8');
+
+        $data = json_decode($request->getContent(), true);
 
         $html = $this->renderView('pdf/pdf.html.twig', [
             'title' => 'Hello World !',
-            'report' => $report
+            'data' => $data
         ]);
 
         $finename = 'custom_pdf_from_twig'; // change this dynamically
@@ -37,6 +40,6 @@ class ActivityReportController extends AbstractController
         }
 
         return $response;
-        
+
     }
 }
