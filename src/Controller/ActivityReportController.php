@@ -17,7 +17,8 @@ class ActivityReportController extends AbstractController
     {
         $knpSnappyPdf->setOption('encoding', 'utf-8');
 
-        $data = json_decode($request->getContent(), true);
+        $data = json_decode($request->getContent(), true); // get data from request
+        // $data = [{"day":"1","activity":"1","customers":"qwe","project":"qwe","tasks":"qwe"}]; // test data
 
         $html = $this->renderView('pdf/pdf.html.twig', [
             'title' => 'Hello World !',
