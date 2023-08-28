@@ -144,6 +144,24 @@
 
 */
 
+#report-pdf .content table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#report-pdf .content table thead tr th {
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem;
+  background-color: #000;
+  color: #fff;
+}
+
+#report-pdf .content table tbody tr td {
+  text-align: center;
+  padding: 0.5rem;
+}
+
 /* 
 
   FOOTER : Signatures

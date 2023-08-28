@@ -2,9 +2,9 @@
 
 {% block body %}
 
-{% for item in data %}
-  {{ item.project }}
-{% endfor %}
+{# {% for item in data %}
+  {{item.day}}
+{% endfor %} #}
 
  <div id="report-pdf">
   <header id="page-header">
@@ -20,7 +20,7 @@
     <header>
       <div class="header__title">
         <h1>Compte rendu d'activité</h1>
-        <p class="report__date">Août 2023</p>
+        <p class="report__date">{{ data.0.day | format_date(pattern="MMMM Y", locale='fr')}}</p>
       </div>
       <div class="header__content">
         <div class="left">
@@ -46,7 +46,28 @@
       </div>
     </header>
     <div class="content">
-      Ici le calendrier
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Date</th>
+            <th>Activité</th>
+            <th>Projet / travaux</th>
+            <th>Tâches</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for day in data %}
+            <tr>
+              <td>{{ day.day | format_date(pattern="eeee dd/MM/Y", locale='fr')}}</td>
+              <td>{{ day.day }}</td>
+              <td>{{ day.activity }}</td>
+              <td>{{ day.project }}</td>
+              <td>{{ day.tasks }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
     <footer class="signatures">
       <div class="item">
