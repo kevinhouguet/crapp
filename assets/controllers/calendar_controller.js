@@ -93,7 +93,7 @@ export default class extends Controller {
       const currentMonth = new Date().getMonth();
       for (let i = 0; i < 12; i++) {
         const option = document.createElement('option');
-        option.value = i;
+        option.value = i + 1;
         option.textContent = months[i];
         if (i === currentMonth) {
           option.setAttribute('selected', true);
@@ -121,13 +121,13 @@ export default class extends Controller {
     handleOnMonthChange = (event) => {
       const year = this.element.querySelector('select.year').value;
       this.calendarElement.removeChild(this.calendarElement.lastChild);
-      this.calendarElement.appendChild(this.createCalendar(parseInt(event.target.value) + 1, parseInt(year,10)));
+      this.calendarElement.appendChild(this.createCalendar(parseInt(event.target.value), parseInt(year,10)));
     }
 
     handleOnYearChange = (event) => {
       const month = this.element.querySelector('select.month').value;
       this.calendarElement.removeChild(this.calendarElement.lastChild);
-      this.calendarElement.appendChild(this.createCalendar(parseInt(month) + 1, parseInt(event.target.value,10)));
+      this.calendarElement.appendChild(this.createCalendar(parseInt(month), parseInt(event.target.value,10)));
     }
 
     handleClickedDay = (event) => {
@@ -208,6 +208,9 @@ export default class extends Controller {
         document.body.appendChild(a);
         a.click();    
         a.remove();
+
+        // const payload = await httpResponse.json();
+        // this.generatePdf(payload);
       } else {
         console.log(httpResponse);
       }
@@ -215,6 +218,10 @@ export default class extends Controller {
       // httpResponse.json().then((data) => {
       //   console.log(data);
       // });
+    }
+
+    generatePdf = async (payload) => {
+      this.dispatch('generate', { detail: {content: payload }});
     }
 
     handleAddNewCustomer = (event) => {
@@ -242,8 +249,14 @@ export default class extends Controller {
         else {
 
           if(activity.value != '' && customers.value != '' && project.value != '' && tasks.value != '') {
+
+            console.log(this.element.querySelector('select.year').value);
+            console.log(this.element.querySelector('select.month').value - 1);
+            console.log(daySelected.textContent);
             const obj = { 
-              day : daySelected.textContent, 
+              day : new Date( this.element.querySelector('select.year').value, 
+                              this.element.querySelector('select.month').value - 1,
+                              daySelected.textContent).toLocaleString('en-EN'),
               activity : activity.value, 
               customers : customers.value, 
               project : project.value, 
