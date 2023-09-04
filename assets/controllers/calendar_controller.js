@@ -148,7 +148,7 @@ export default class extends Controller {
       const day = event.target.textContent;
       const month = this.element.querySelector('select.month').value;
       const year = this.element.querySelector('select.year').value;
-      const date = new Date(year, month, day);
+      const date = new Date(year, month - 1, day);
       console.log(date);
       this.updateViewActivity(date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }));
 
