@@ -12,3 +12,4 @@ import './styles/app.css';
 import './styles/calendar.css';
 import './styles/dayDescription.css';
 import './styles/pdf.css';
+import './styles/login.css';
