@@ -30,6 +30,24 @@ class UserController extends AbstractController
         return new JsonResponse(['token' => $user->getId(), 'OK' => 200]);
     }
 
+    #[Route('/api/signup', methods: ['POST'])]
+    public function signup(EntityManagerInterface $entityManager, Request $request) : JsonResponse
+    {
+        $data = $request->request->all();
+        $user = $this->userRepository->findOneBy(['email' => $data['email']]);
+        if ($user) {
+            return new JsonResponse(['message' => sprintf('User %s already exists', $data['email']), 'error' => 400]);
+        }
+        $user = new User();
+        $user->setPassword($data['password']);
+        $user->setEmail($data['email']);
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+        
+        return new JsonResponse(['token' => $user->getId(), 'OK' => 200]);
+    }
+
 
     #[Route('/api/user', methods: ['GET'])]
     public function get(Request $request) : JsonResponse
@@ -48,20 +66,20 @@ class UserController extends AbstractController
         ];
         return new JsonResponse(['data' => $user, 'OK' => 200]);
     }
-    #[Route('/api/user', methods: ['POST'])]
-    public function new(EntityManagerInterface $entityManager, Request $request) : JsonResponse
-    {
-        $data = $request->request->all();
-        $user = new User();
-        $user->setUsername($data['username']);
-        $user->setPassword($data['password']);
-        $user->setEmail($data['email']);
+    // #[Route('/api/user', methods: ['POST'])]
+    // public function new(EntityManagerInterface $entityManager, Request $request) : JsonResponse
+    // {
+    //     $data = $request->request->all();
+    //     $user = new User();
+    //     $user->setUsername($data['username']);
+    //     $user->setPassword($data['password']);
+    //     $user->setEmail($data['email']);
 
-        $entityManager->persist($user);
-        $entityManager->flush();
+    //     $entityManager->persist($user);
+    //     $entityManager->flush();
 
-        return new JsonResponse(sprintf('User %s successfully created', $user->getUsername()));
-    }
+    //     return new JsonResponse(sprintf('User %s successfully created', $user->getUsername()));
+    // }
     #[Route('/api/user', methods: ['PATCH'])]
     public function update(EntityManagerInterface $entityManager) : JsonResponse
     {

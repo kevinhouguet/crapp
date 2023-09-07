@@ -5,12 +5,10 @@
 
 <header>
   <nav>
-    <ul data-controller="login">
-      {# <li class='brand'><a href="{{ path('home') }}">{{ title }}</a></li> #}
+    <ul>
       <li class='brand'><a href="">{{ title }}</a></li>
-      <li><a  
-              data-action="click->login#handleClickLogin"
-              href="" class="btn-secondary">Login</a></li>
+      <div data-controller="nav">
+      </div>
     </ul>
   </nav>
 </header>

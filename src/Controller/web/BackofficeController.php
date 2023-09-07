@@ -13,7 +13,7 @@ class BackofficeController extends AbstractController {
   public function index() {
     return $this->render('backoffice/index.html.twig', [
       'controller_name' => 'BackOffice',
-      'title' => 'BackOffice',
+      'title' => 'It\'s a CRApp',
     ]);
   }
 }

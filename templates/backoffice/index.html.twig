@@ -2,7 +2,16 @@
 
 {% block body %}
 
-{{title}}
-<div data-controller="backoffice"></div>
+<header>
+  <nav>
+    <ul>
+      <li class='brand'><a href="">{{ title }}</a></li>
+      <div data-controller="nav">
+      </div>
+    </ul>
+  </nav>
+</header>
+
+
 
 {% endblock %}
