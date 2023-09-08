@@ -6,12 +6,17 @@
   <nav>
     <ul>
       <li class='brand'><a href="">{{ title }}</a></li>
-      <div data-controller="nav">
-      </div>
+      <div data-controller="nav"></div>
     </ul>
   </nav>
 </header>
 
+<main id="backoffice">
+  <div class="container">
+    <nav data-controller="backoffice-nav"></nav>
+    <div class="content" data-controller="backoffice-content"></div>
+  </div>
+</main>
 
 
 {% endblock %}
