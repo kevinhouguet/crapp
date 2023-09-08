@@ -39,7 +39,7 @@ export default class extends Controller {
   }
 
   renderAccount({data}) {
-    const accountGeneralInfoElem = Helper.form.create('POST', '', ['account-general-info'], 'submit->backoffice-content#handleUpdateAccount');
+    const accountGeneralInfoElem = Helper.form.create('POST', '', ['account-general-info'], 'submit->backoffice-content#handleUpdateAccountGeneral');
     const accountInputGroupNameElem = Helper.input.createInputGroup({
       'classes': ['input-group'],
       'inputInfo': {
@@ -106,7 +106,7 @@ export default class extends Controller {
       'type': 'submit',
       'name': 'submit',
       'value': 'Send modification',
-      'classes': ['input-group__submit', 'input-group--input'],
+      'classes': ['input-group__submit', 'input-group--input']
     });
 
     accountGeneralInfoElem.append(accountInputGroupNameElem, accountInputGroupSurnameElem, accountInputGroupEmailElem, accountInputGroupCompanyElem, accountGeneralInfoSubmitElem);
@@ -179,4 +179,25 @@ export default class extends Controller {
 
   }
 
+  async handleUpdateAccountGeneral(event) {
+    event.preventDefault();
+    const form = event.target;
+
+    const data = new FormData(form);
+    // Data structure issue so we need to convert it to json before sending it
+    // Issue : API can't read FormData with Method PUT or PATCH 
+    const jsondata = {};
+    data.forEach((value, key) => jsondata[key] = value);
+    
+    const httpResponse = await fetch('/api/truc', {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${window.localStorage.getItem('token')}`,
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      body: JSON.stringify(jsondata),
+    });
+    const response = await httpResponse.json();
+    console.log(response);
+  }
 }

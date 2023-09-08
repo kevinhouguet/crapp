@@ -60,35 +60,49 @@ class UserController extends AbstractController
         }
         $user = [
             'id' => $userInDb->getId(),
-            'username' => $userInDb->getUsername(),
-            'password' => $userInDb->getPassword(),
+            'name' => $userInDb->getName(),
+            'surname' => $userInDb->getSurname(),
             'email' => $userInDb->getEmail(),
         ];
         return new JsonResponse(['data' => $user, 'OK' => 200]);
     }
-    // #[Route('/api/user', methods: ['POST'])]
-    // public function new(EntityManagerInterface $entityManager, Request $request) : JsonResponse
-    // {
-    //     $data = $request->request->all();
-    //     $user = new User();
-    //     $user->setUsername($data['username']);
-    //     $user->setPassword($data['password']);
-    //     $user->setEmail($data['email']);
 
-    //     $entityManager->persist($user);
-    //     $entityManager->flush();
+    #[Route('/api/truc', methods: ['PUT'])]
+    public function update(Request $request, EntityManagerInterface $entityManager) : JsonResponse
+    {
+        $token = $request->headers->get('authorization');
+        $id = substr($token, 7);
+        // $data = $request->request->get('name');
+        $data = $request->getContent();
+        // $userInDb = $this->userRepository->findOneBy(['id' => $id]);
+        // if (!$userInDb) {
+        //     return new JsonResponse(['message' => sprintf('User with id %s not found', $id), 'error' => 404]);
+        // }
+        // $userInDb->setName($data['name']);
+        // $userInDb->setSurname($data['surname']);
 
-    //     return new JsonResponse(sprintf('User %s successfully created', $user->getUsername()));
-    // }
-    #[Route('/api/user', methods: ['PATCH'])]
-    public function update(EntityManagerInterface $entityManager) : JsonResponse
+        // $entityManager->flush();
+
+        // $user = [
+        //     'id' => $userInDb->getId(),
+        //     'name' => $userInDb->getName(),
+        //     'surname' => $userInDb->getSurname(),
+        //     'email' => $userInDb->getEmail(),
+        // ];
+
+        // return new JsonResponse(['data' => $user, 'OK' => 200]);
+        return new JsonResponse(['data' => $data, 'id' => $id, 'OK' => 200]);
+    }
+
+    #[Route('/api/password', methods: ['PATCH'])]
+    public function updatePassword(EntityManagerInterface $entityManager) : JsonResponse
     {
         $user = $this->userRepository->findOneBy(['id' => 1]);
         $user->setPassword('azerty');
 
         $entityManager->flush();
 
-        return new JsonResponse(sprintf('User %s successfully updated', $user->getUsername()));
+        return new JsonResponse(sprintf('User %s successfully updated'));
     }
 
     #[Route('/api/user', methods: ['DELETE'])]
@@ -104,6 +118,6 @@ class UserController extends AbstractController
         $entityManager->remove($user);
         $entityManager->flush();
 
-        return new JsonResponse(sprintf('User %s successfully deleted', $user->getUsername()));
+        return new JsonResponse(sprintf('User %s successfully deleted', $user->getEmail()));
       }
 }
