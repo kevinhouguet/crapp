@@ -150,6 +150,6 @@ export default class extends Controller {
     event.preventDefault();
     console.log('Logout button clicked');
     window.localStorage.removeItem('token');
-    window.location.reload();
+    window.location.href = '/';
   }
 }
