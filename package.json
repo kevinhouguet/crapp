@@ -1,10 +1,11 @@
 {
-  "name": "express-api-w-front-builder",
+  "name": "crapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run dev --prefix server",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix front",
     "build": "npm run build:client && npm run build:cpClient",
     "build:client": "npm run build --prefix front",
     "build:server": "npm run build --prefix server",
@@ -14,19 +15,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kevinhouguet/express-api-w-front-builder.git"
+    "url": "git+https://github.com/kevinhouguet/crapp.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "kevinHouguet",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kevinhouguet/express-api-w-front-builder/issues"
+    "url": "https://github.com/kevinhouguet/crapp/issues"
   },
-  "homepage": "https://github.com/kevinhouguet/express-api-w-front-builder#readme",
-  "dependencies": {
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2"
-  },
+  "homepage": "https://github.com/kevinhouguet/crapp#readme",
   "devDependencies": {
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
