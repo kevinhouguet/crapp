@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npx nodemon server"
+    "dev": "npm run dev --prefix server",
+    "build": "npm run build:client && npm run build:cpClient",
+    "build:client": "npm run build --prefix front",
+    "build:server": "npm run build --prefix server",
+    "build:cpClient": "mv front/dist ./dist",
+    "build:cpServer": "mv server/src ./src",
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,13 +24,12 @@
   },
   "homepage": "https://github.com/kevinhouguet/express-api-w-front-builder#readme",
   "dependencies": {
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2"
   },
   "devDependencies": {
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.27.4",
-    "vite": "^4.0.4"
+    "eslint-plugin-import": "^2.27.4"
   }
 }

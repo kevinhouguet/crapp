@@ -1,3 +1,9 @@
 node_modules/
-/.env.local
+/*.env.local
 .env
+
+# Build files
+/dist
+/src
+/server/src
+/front/dist
