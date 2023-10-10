@@ -6,4 +6,4 @@ node_modules/
 /dist
 /src
 /server/src
-/front/dist
+#/front/dist
