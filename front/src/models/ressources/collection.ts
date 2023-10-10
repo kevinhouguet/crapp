@@ -6,7 +6,7 @@ export interface IRessourceCollection {
 
 export default class RessourcesCollection {
 
-  private static fetchUrl = 'http://localhost:3000/ressources';
+  private static fetchUrl = 'http://localhost:3000/api';
   private static context = 'reports';
 
   constructor() {
