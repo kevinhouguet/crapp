@@ -8,25 +8,20 @@ export interface IMenuProps {
 export default class Menu extends Component<IMenuProps, IMenuProps> {
   constructor(props: IMenuProps) {
     super(props);
-    this.state = {
-      menuItems: this.props.menuItems
-    };
   }
 
   render() {
-    const { menuItems } = this.state;
+    const { menuItems } = this.props;
     return (
-      <>
-        <ul>
-          {menuItems.map((item, i) => {
-            return <li key={i}><a
-              onClick={item.onClick}
-              href={item.URL}
-              className={item.classes ? item.classes : ''}
-            >{item.displayName}</a></li>;
-          })}
-        </ul>
-      </>
+      <ul>
+        {menuItems.length && menuItems.map((item, i) => {
+          return <li key={i}><a
+            onClick={item.onClick}
+            href={item.URL}
+            className={item.classes ? item.classes : ''}
+          >{item.displayName}</a></li>;
+        })}
+      </ul>
     );
   }
 }
