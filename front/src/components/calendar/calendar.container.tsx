@@ -15,10 +15,19 @@ export default class CalendarContainer extends React.Component {
     this.currentYear = YearType.create(2023);
   }
 
+  selectADay(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    const dayPreviouslySelected = document.querySelector('.day-selected');
+    dayPreviouslySelected?.classList.remove('day-selected');
+    
+    const day = e.currentTarget;
+    day.classList.add('day-selected')
+  }
+
   render() {
     return (
       <div className='calendar-container'>
-        <CalendarLayout calendar={MCalendar.createAMonth(this.currentYear, this.currentMonth)} />
+        <CalendarLayout calendar={MCalendar.createAMonth(this.currentYear, this.currentMonth)}
+                        onClick= {this.selectADay} />
       </div>
     )
   }
