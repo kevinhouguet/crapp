@@ -6,10 +6,10 @@ export interface IRessource {
   id: RessourceID;
 }
 
-export default class Ressources {
+export default class Ressource {
 
-  private static fetchUrl = 'http://localhost:3000/ressources';
-  private static context = 'reports';
+  public static readonly fetchUrl = 'http://localhost:3000/ressources';
+  public static readonly context = 'reports';
 
   constructor() {
   }
