@@ -30,10 +30,14 @@ export default class Calendar {
     return years;
   }
 
-  createAMonth(year: Year, month: Month) {
+  createAMonth({year}: Year, {month}: Month) {
     const date = new Date(Number(year), Number(month) - 1, 1);
     const calendar = [];
-    const firstDay = date.getDay();
+    
+    // +6 because getDay() returns 0 for Sunday, 1 for Monday, etc.
+    // and we want to start the week on Monday
+    const firstDay = date.getDay() + 6;
+
     const lastDay = new Date(Number(year), Number(month), 0).getDate();
     let week = [];
 
