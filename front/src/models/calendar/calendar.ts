@@ -4,7 +4,7 @@ import Year from "./types/year";
 export default class Calendar {
 
   static getDays() {
-    return ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   }
 
   static getMonths() {
@@ -27,7 +27,7 @@ export default class Calendar {
     
     // +6 because getDay() returns 0 for Sunday, 1 for Monday, etc.
     // and we want to start the week on Monday
-    const firstDayPosition = date.getDay() + 6;
+    const firstDayPosition = date.getDay() === 0 ? date.getDay() + 6 : date.getDay() - 1;
 
     const lastDay = new Date(Number(year), Number(month), 0).getDate();
 
