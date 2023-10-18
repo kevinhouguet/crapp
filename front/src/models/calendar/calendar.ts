@@ -12,6 +12,11 @@ export default class Calendar {
       'October', 'November', 'December'];
   }
 
+  static getMonthsShort() {
+    return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
+      'Oct', 'Nov', 'Dec'];
+  }
+
   static getYears() {
     const years = [];
     const currentYear = new Date().getFullYear();

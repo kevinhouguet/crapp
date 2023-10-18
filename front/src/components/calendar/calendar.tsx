@@ -15,9 +15,9 @@ export default class CalendarLayout extends React.Component <CalendarProps>{
 
   render(): React.ReactNode {
     const { calendar, onClick } = this.props;
-    console.log(this.props.onClick)
     const calendarHeaderDays = MCalendar.getDays();
     const dayClass = "calendar-container__calendar__day";
+    
     return (
       <div className="calendar-container__calendar">
         <div className="calendar-container__calendar__header">
