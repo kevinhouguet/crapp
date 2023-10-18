@@ -27,11 +27,19 @@ export default class CalendarContainer extends React.Component <Record<string,ne
     day.classList.add('day-selected')
   }
 
-  handleChangeDate = (month: MonthType, year: YearType) => {
-    this.setState({
-      month,
-      year
-    })
+  handleChangeDate = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const name = e.currentTarget.name;
+    const value = e.currentTarget.value;
+
+    if(name === 'months'){
+      this.setState({
+        month: MonthType.create(parseInt(value, 10))
+      })
+    } else if(name === 'years'){
+      this.setState({
+        year: YearType.create(parseInt(value, 10))
+      })
+    }
   }
 
   render() {
