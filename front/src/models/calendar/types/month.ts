@@ -13,4 +13,8 @@ export default class MonthType {
       return new MonthType(parseInt(month.toString(), 10));
     }
   }
+
+  public toString() {
+    return this.month.toString();
+  }
 }
