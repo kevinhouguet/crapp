@@ -20,6 +20,7 @@ export default class CalendarContainer extends React.Component <Record<string,ne
   }
 
   selectADay(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    if(!e.currentTarget.textContent) return;
     const dayPreviouslySelected = document.querySelector('.day-selected');
     dayPreviouslySelected?.classList.remove('day-selected');
     
