@@ -5,6 +5,7 @@ import ClientLayoutContainer from "./client/client.container";
 import ProjectLayoutContainer from "./project/project.container";
 import UnitLayoutContainer from "./unit/unit.container";
 import PrestationLayoutContainer from "./prestation/prestation.container";
+import DatePickerLayoutContainer from "./datePicker/datePicket.container";
 
 interface IReportFormContainerState {
   clients: ClientModel[];
@@ -21,6 +22,7 @@ export default class ReportFormContainer extends React.Component <Record<never, 
         <ProjectLayoutContainer />
         <UnitLayoutContainer />
         <PrestationLayoutContainer />
+        <DatePickerLayoutContainer />
       </div>
     );
   }
