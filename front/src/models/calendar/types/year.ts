@@ -14,4 +14,8 @@ export default class YearType {
       return new YearType(parseInt(year.toString(), 10));
     }
   }
+
+  public toString() {
+    return this.year.toString();
+  }
 }

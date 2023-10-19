@@ -1,5 +1,6 @@
 import Header from "./components/header"
 import { useEffect } from "react"
+import Calendar from "./components/calendar/calendar.container";
 
 export default function App() {
 
@@ -15,6 +16,7 @@ export default function App() {
   return (
     <>
       <Header {...headerProps} />
+      <Calendar />
     </>
   )
 }
