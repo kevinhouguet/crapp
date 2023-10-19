@@ -1,6 +1,7 @@
 import Header from "./components/header"
 import { useEffect } from "react"
 import Calendar from "./components/calendar/calendar.container";
+import ReportFormContainer from "./components/reportForm/reportForm.container";
 
 export default function App() {
 
@@ -16,6 +17,7 @@ export default function App() {
   return (
     <>
       <Header {...headerProps} />
+      <ReportFormContainer />
       <Calendar />
     </>
   )
