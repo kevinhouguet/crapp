@@ -35,12 +35,12 @@ export default class CalendarContainer extends React.Component <Record<string,ne
   }
 
   render() {
+    const calendar = MCalendar.createAMonth(this.state.year, this.state.month);
     return (
       <div className='calendar-container'>
         <CalendarFormContainer  month={this.state.month} year={this.state.year}
                                 onChangeDate={this.handleChangeDate}/>
-        <CalendarLayout calendar={MCalendar.createAMonth(this.state.year, this.state.month)}
-                         />
+        <CalendarLayout calendar={calendar} />
       </div>
     )
   }
