@@ -19,15 +19,6 @@ export default class CalendarContainer extends React.Component <Record<string,ne
     }
   }
 
-  selectADay(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    if(!e.currentTarget.textContent) return;
-    const dayPreviouslySelected = document.querySelector('.day-selected');
-    dayPreviouslySelected?.classList.remove('day-selected');
-    
-    const day = e.currentTarget;
-    day.classList.add('day-selected')
-  }
-
   handleChangeDate = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const name = e.currentTarget.name;
     const value = e.currentTarget.value;
@@ -49,7 +40,7 @@ export default class CalendarContainer extends React.Component <Record<string,ne
         <CalendarFormContainer  month={this.state.month} year={this.state.year}
                                 onChangeDate={this.handleChangeDate}/>
         <CalendarLayout calendar={MCalendar.createAMonth(this.state.year, this.state.month)}
-                        onClick= {this.selectADay} />
+                         />
       </div>
     )
   }

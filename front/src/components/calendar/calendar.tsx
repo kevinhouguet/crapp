@@ -1,10 +1,9 @@
 import React from "react";
 import './calendar.scss';
-import MCalendar from "../../models/calendar/calendar";
+import { Day } from "../../models/calendar/calendar";
 
 interface CalendarProps {
-  calendar: Array<Array<number|string>>;
-  onClick: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  calendar: Array<Day[]>;
 }
 
 export default class CalendarLayout extends React.Component <CalendarProps>{
@@ -14,37 +13,27 @@ export default class CalendarLayout extends React.Component <CalendarProps>{
   }
 
   render(): React.ReactNode {
-    const { calendar, onClick } = this.props;
-    const calendarHeaderDays = MCalendar.getDays();
-    const dayClass = "calendar-container__calendar__day";
-    
+    const { calendar } = this.props;
     return (
-      <div className="calendar-container__calendar">
-        <div className="calendar-container__calendar__header">
-          {calendarHeaderDays.map((day, index) => {
-            return (
-              <div  className="calendar-container__calendar__header__day"
-                    key={index}>
-                {day.charAt(0).toUpperCase()}
-              </div>
-            )
-          })}
-        </div>
-        {calendar && calendar.map((week, index) => {
+      <div className="calendar">
+        {calendar.map((week: Day[], weekIndex: number) => {
           return (
-            <div className="calendar-container__calendar__week" key={index}>
-              {week.map((day, index) => {
-                return (
-                  <div  {...day === "" ? { className: `${dayClass} ${dayClass}--empty` } : { className: dayClass }}
-                        key={index}
-                        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => onClick(e)}>
-                    {day}
+            <div className="calendar__week" key={weekIndex}>
+              {week.map((day: Day, dayIndex: number) => (
+                day && (
+                  <div className="calendar__day" key={dayIndex}>
+                    <div className="calendar__day__dayName">{day.dayName + ' ' + day.day}</div>
+                    <div className="calendar__day__inputs">
+                      <button type="button">-</button>
+                      <input type="text" id={'dayUnit-'+day.day} name="dayUnit" defaultValue="0" />
+                      <button type="button">+</button>
+                    </div>
                   </div>
                 )
-              })}
+              ))}
             </div>
           )
-        })}
+        })}      
       </div>
     )
   }

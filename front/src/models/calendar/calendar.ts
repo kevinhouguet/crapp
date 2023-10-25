@@ -1,7 +1,24 @@
 import Month from "./types/month";
 import Year from "./types/year";
 
+export interface Day {
+  dayName: string;
+  day: number;
+  month: number;
+  year: number;
+}
+
+export interface ICalendar {
+  weeks: Array<Array<Day | null>>;
+}
+
 export default class Calendar {
+
+  static locale: string;
+
+  constructor(locale: string) {
+    Calendar.locale = locale;
+  }
 
   static getDays() {
     return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -26,6 +43,10 @@ export default class Calendar {
     return years;
   }
 
+  static getDayName(date: Date) {
+    return date.toLocaleDateString(Calendar.locale, {weekday: 'long'});
+  }
+
   static createAMonth({year}: Year, {month}: Month) {
     const date = new Date(Number(year), Number(month) - 1, 1);
     const calendarOfTheMonth = [];
@@ -38,11 +59,19 @@ export default class Calendar {
 
     let week = [];
     for (let i = 0; i < firstDayPosition; i++) {
-      week.push('');
+      week.push(null);
     }
 
     for (let i = 1; i <= lastDay; i++) {
-      week.push(i);
+      const objectDay = {
+        dayName: this.getDayName(new Date(Number(year), Number(month) - 1, i)),
+        day: i,
+        month: Number(month),
+        year: Number(year)
+      }
+
+      week.push(objectDay);
+
       if (week.length === 7) {
         calendarOfTheMonth.push(week);
         week = [];
@@ -51,7 +80,7 @@ export default class Calendar {
 
     if(week.length < 7) {
       for (let i = week.length; i < 7; i++) {
-        week.push('');
+        week.push(null);
       }
     }
 
