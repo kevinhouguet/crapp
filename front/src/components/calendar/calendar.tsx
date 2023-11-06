@@ -4,19 +4,18 @@ import { Day } from "../../models/calendar/calendar";
 import Month from "../../models/calendar/month";
 import DayContainer from "./day.container";
 
-interface CalendarProps {
+interface ICalendarState {
   calendar: Month;
 }
 
-export default class CalendarLayout extends React.Component <CalendarProps>{
+export default class CalendarLayout extends React.Component <ICalendarState, ICalendarState>{
 
-  constructor(props: CalendarProps) {
+  constructor(props: ICalendarState) {
     super(props);
   }
 
   render(): React.ReactNode {
     const { calendar } = this.props;
-    console.log(calendar)
     return (
       <div className="calendar">
         {calendar.days.map((day: Day) => {

@@ -18,13 +18,16 @@ export default class Month implements IMonth {
   month: number;
   days: Day[] = [];
   private lastDay: number;
+  
   constructor({year}: YearType, {month}: MonthType) {
-    this.year = year;
-    this.month = month;
+    this.year = year || new Date().getFullYear();
+    this.month = month || new Date().getMonth() + 1;
     this.lastDay = new Date(Number(year), Number(month), 0).getDate();
     
     this.setDaysOfMonth();
   }
+
+  
   getMonthName(): string {
     return Calendar.getMonths()[Number(this.month) - 1];
   }
@@ -35,7 +38,7 @@ export default class Month implements IMonth {
   setDaysOfMonth(): Day[]{
     for (let i = 1; i <= this.lastDay; i++) {
       const objectDay = {
-        dayName: Calendar.getDayName(new Date(Number(this.year), Number(this.month) - 1, i)),
+        dayName: Calendar.getDayName(new Date(this.year, this.month - 1, i)),
         day: i,
         unit: 0,
         month: Number(this.month),

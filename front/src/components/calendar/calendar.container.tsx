@@ -2,20 +2,24 @@ import React from 'react';
 import YearType from '../../models/calendar/types/year';
 import MonthType from '../../models/calendar/types/month';
 import CalendarLayout from './calendar';
-import MCalendar from '../../models/calendar/calendar';
 import CalendarFormContainer from './calendarForm/calendarForm.container';
+import Month from '../../models/calendar/month';
 
 interface ICalendar {
   year: YearType;
   month: MonthType;
+  calendar: Month;
 }
 
 export default class CalendarContainer extends React.Component <Record<string,never>, ICalendar> {
+  private month: MonthType = MonthType.create(new Date().getMonth() + 1);
+  private year: YearType = YearType.create(new Date().getFullYear());
   constructor(props = {}) {
     super(props);
     this.state = {
-      month: MonthType.create(new Date().getMonth() + 1),
-      year: YearType.create(new Date().getFullYear())
+      month: this.month,
+      year: this.year,
+      calendar: new Month(this.year, this.month)
     }
   }
 
@@ -24,23 +28,26 @@ export default class CalendarContainer extends React.Component <Record<string,ne
     const value = e.currentTarget.value;
 
     if(name === 'months'){
+      const newMonth = MonthType.create(parseInt(value, 10));
       this.setState({
-        month: MonthType.create(parseInt(value, 10))
+        month: newMonth,
+        calendar: new Month(this.state.year, newMonth)
       })
     } else if(name === 'years'){
+      const newYear = YearType.create(parseInt(value, 10));
       this.setState({
-        year: YearType.create(parseInt(value, 10))
+        year: newYear,
+        calendar: new Month(newYear, this.state.month)
       })
     }
   }
 
   render() {
-    const calendar = MCalendar.createAMonth(this.state.year, this.state.month);
     return (
       <div className='calendar-container'>
         <CalendarFormContainer  month={this.state.month} year={this.state.year}
                                 onChangeDate={this.handleChangeDate}/>
-        <CalendarLayout calendar={calendar} />
+        <CalendarLayout calendar={this.state.calendar}/>
       </div>
     )
   }
